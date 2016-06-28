@@ -5,7 +5,7 @@ public class Main {
 	public static void main(String[] args){
 		Product p = new Product("notebook", "HP", 1999.99, "2348203894032948");
 		
-		CompressedXMLSerializer cxs = new CompressedXMLSerializer();
+		FileSerializer cxs = new CompressedXMLSerializer();
 		cxs.generateFile("product.zip", p);
 		
 		CryptoPropertiesSerializer sps = new CryptoPropertiesSerializer(5);
