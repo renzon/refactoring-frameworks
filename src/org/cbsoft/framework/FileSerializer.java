@@ -7,26 +7,27 @@ import java.util.Map;
 import java.util.zip.ZipEntry;
 import java.util.zip.ZipOutputStream;
 
-public abstract class FileSerializer {
+public class FileSerializer {
+	private DataFormatter df;
 
-	public FileSerializer() {
+	public FileSerializer(DataFormatter df, PostProcessor pp) {
 		super();
+		this.df = df;
+		this.pp = pp;
 	}
 
-	protected abstract byte[] formatData(Map<String, Object> props);
-
-	protected abstract byte[] postProcess(byte[] bytes) throws IOException;
+	private PostProcessor pp;
 
 	public void generateFile(String filename, PropertiesGetter propGetter) {
-		byte[] bytes = formatData(propGetter.getPropertiesList());
-		
-	    try {
-	    	bytes = postProcess(bytes);
+		byte[] bytes = df.formatData(propGetter.getPropertiesList());
+
+		try {
+			bytes = pp.postProcess(bytes);
 			FileOutputStream fileout = new FileOutputStream(filename);
 			fileout.write(bytes);
 			fileout.close();
 		} catch (Exception e) {
-			throw new RuntimeException("Problems writing the file",e);
+			throw new RuntimeException("Problems writing the file", e);
 		}
 	}
 
