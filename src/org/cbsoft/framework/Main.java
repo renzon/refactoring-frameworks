@@ -7,12 +7,14 @@ public class Main {
 		XMLFormatter xmlFormatter = new XMLFormatter();
 		PropertiesFormatter pptFmtter = new PropertiesFormatter();
 		Compressor compressor = new Compressor();
+		Crypto crypto = new Crypto(5);
+		CompositePostProcessor cryptoCompressor=new CompositePostProcessor(crypto,compressor);
 		
-		FileSerializer cxs = new FileSerializer(xmlFormatter,compressor);
+		FileSerializer cxs = new FileSerializer(xmlFormatter,cryptoCompressor);
 		cxs.generateFile("product.zip", p);
 		
-		FileSerializer sps = new FileSerializer(pptFmtter,new Crypto(5));
-		sps.generateFile("product.txt", p);
+//		FileSerializer sps = new FileSerializer(pptFmtter,compressor);
+//		sps.generateFile("product.zip", p);
 		
 	}
 
