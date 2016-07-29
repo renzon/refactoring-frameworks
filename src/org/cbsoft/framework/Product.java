@@ -1,5 +1,6 @@
 package org.cbsoft.framework;
 
+import aula.Uppercase;
 
 public class Product{
 	
@@ -22,6 +23,7 @@ public class Product{
 		this.code = code;
 		this.secretCode=secretCode;
 	}
+	@Uppercase
 	public String getName() {
 		return name;
 	}
@@ -34,12 +36,15 @@ public class Product{
 	public void setBrand(String brand) {
 		this.brand = brand;
 	}
+	@Prefix("R$")
 	public double getPrice() {
 		return price;
 	}
+	
 	public void setPrice(double price) {
 		this.price = price;
 	}
+	@Prefix("#NR")
 	public String getCode() {
 		return code;
 	}
